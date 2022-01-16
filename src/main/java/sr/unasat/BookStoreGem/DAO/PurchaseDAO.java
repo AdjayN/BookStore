@@ -141,7 +141,7 @@ public class PurchaseDAO {
         return  null;
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         try{
             transaction = entityManager.getTransaction();
             transaction.begin();

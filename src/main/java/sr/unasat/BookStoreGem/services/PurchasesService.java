@@ -3,16 +3,16 @@ package sr.unasat.BookStoreGem.services;
 import sr.unasat.BookStoreGem.DAO.BooksDAO;
 import sr.unasat.BookStoreGem.DAO.KlantenDAO;
 import sr.unasat.BookStoreGem.DAO.PurchaseDAO;
+import sr.unasat.BookStoreGem.DAO.ReserveringenDAO;
 import sr.unasat.BookStoreGem.Entities.Books;
 import sr.unasat.BookStoreGem.Entities.Klanten;
 import sr.unasat.BookStoreGem.Entities.Purchases;
 import sr.unasat.BookStoreGem.Entities.Reserveringen;
 import sr.unasat.BookStoreGem.config.JPAConfiguration;
 import sr.unasat.BookStoreGem.designPatterns.Builder.ConcreteBuilders.ConcreteBuilderPurch;
-import sr.unasat.BookStoreGem.designPatterns.Builder.ConcreteBuilders.ConcreteBuilderReser;
+import sr.unasat.BookStoreGem.designPatterns.Builder.ConcreteBuilders.ConcreteBuilderPurchWithReservationId;
 import sr.unasat.BookStoreGem.designPatterns.Builder.Director;
 import sr.unasat.BookStoreGem.designPatterns.Builder.Interfaces.BuilderPurch;
-import sr.unasat.BookStoreGem.designPatterns.Builder.Interfaces.BuilderReser;
 import sr.unasat.BookStoreGem.designPatterns.Decorator.BasicPurchase;
 import sr.unasat.BookStoreGem.designPatterns.Decorator.Purchase;
 import sr.unasat.BookStoreGem.designPatterns.Decorator.SecondBook;
@@ -28,6 +28,7 @@ public class PurchasesService {
     private BooksDAO booksDAO;
     private Director director;
     private PurchaseDAO purchaseDAO;
+    ReserveringenDAO reserveringenDAO;
 
     public PurchasesService() {
         this.scanner = new Scanner(System.in);
@@ -35,7 +36,7 @@ public class PurchasesService {
         this.klantenDAO = new KlantenDAO(JPAConfiguration.getEntityManager());
         this.booksDAO  = new BooksDAO(JPAConfiguration.getEntityManager());
         this.director  = new Director();
-
+        this.reserveringenDAO = new ReserveringenDAO(JPAConfiguration.getEntityManager());
 
         }
     public void purchaseMenuService() {
@@ -57,20 +58,26 @@ public class PurchasesService {
 
             switch(selectedOption){
                 case 1:
-                    System.out.println("Select on");
+                    System.out.println("Select a purchase");
+                    int purchaseId = getPurchaseId();
+                    Purchases purchase = getPurchase(purchaseId);
+                    System.out.println(purchase);
                     break;
                 case 2:
-                    Purchases purchase = createPurchase();
-                    addPurchase(purchase);
+                    Purchases newPurchase = createPurchase();
+                    addPurchase(newPurchase);
                     break;
                 case 3:
                     System.out.println("Update");
                     break;
                 case 4:
-                    System.out.println("Delete");
+                    int deletePurchaseId = getDeletePurchaseId();
+                    deletePurchase(deletePurchaseId);
                     break;
                 case 5:
-                    System.out.println("Select all");
+                    System.out.println("Select all purchases");
+                    List<Purchases> purchaseList = getPurchaseList();
+                    System.out.println(purchaseList);
                     break;
                 case 6:
                     exit = false;
@@ -82,13 +89,28 @@ public class PurchasesService {
         }
     }
 
+    private int getPurchaseId() {
+
+        System.out.println("\nEnter purchase id:\n");
+        int purchaseId = scanner.nextInt();
+
+        return purchaseId;
+    }
+
+    private int getDeletePurchaseId() {
+
+        System.out.println("\nEnter purchase id:\n");
+        int purchaseId = scanner.nextInt();
+
+        return purchaseId;
+    }
+
 
     private Purchases createPurchase() {
 
         Purchases purchases = new Purchases();
 
-
-        System.out.println("\n Add a purchase:\n");
+        System.out.println("\nAdd a purchase:\n");
 
         System.out.println("Enter a klant id");
         int klantId = scanner.nextInt();
@@ -137,7 +159,6 @@ public class PurchasesService {
 
     // add new purchase record to database
     public Purchases addPurchase(Purchases purchases){
-
 
         int klantId = purchases.getKlanten().getIdKlanten();
         Klanten klant = klantenDAO.selectKlantenById(klantId);
@@ -193,8 +214,39 @@ public class PurchasesService {
         return purchaseDAO.create(purchaseNew);
     }
 
+    //add purchases with reservation Id
+    public Purchases addPurchaseWithReservationId(int reservationId){
 
+        Reserveringen reserveringen = reserveringenDAO.selectReserveringenById(reservationId);
 
+        Purchases purchases = new Purchases();
+        purchases.setReserveringen(reserveringen);
+
+        //Builder
+        BuilderPurch builderPurch = new ConcreteBuilderPurchWithReservationId();
+        Purchases purchaseNew = director.DirectBuildPurchWithReservation(builderPurch,purchases);
+
+        return purchaseDAO.create(purchaseNew);
+
+    }
+
+    // Delete klant record from databse
+    public void deletePurchase(int id){
+        purchaseDAO.delete(id);
+    }
+
+    public List<Purchases> getPurchaseList(){
+
+        List<Purchases> purchasesList = purchaseDAO.retrievePurchaseList();
+        return purchasesList;
+
+    }
+
+    public Purchases getPurchase(int id){
+
+        Purchases purchase = purchaseDAO.selectPurchaseById(id);
+        return purchase;
+    }
 
 
 }

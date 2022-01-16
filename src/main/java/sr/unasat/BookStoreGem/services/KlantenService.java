@@ -55,7 +55,11 @@ public class KlantenService {
                     addKlant(klant);
                     break;
                 case 3:
-                    System.out.println("Update");
+                    System.out.println("Update klant");
+                    System.out.println("Enter old klant id");
+                    int oldKlantId = scanner.nextInt();
+                    Klanten klantUpdated = getUpdateKlantInfo();
+                    updateKlant(oldKlantId,klantUpdated);
                     break;
                 case 4:
                     System.out.println("Delete");
@@ -73,6 +77,23 @@ public class KlantenService {
         }
     }
 
+    private Klanten getUpdateKlantInfo() {
+
+        Klanten klant = new Klanten();
+
+        scanner.nextLine();
+        System.out.println("Enter new customer name");
+        String newCustomerName = scanner.nextLine();
+
+        klant.setNaam(newCustomerName);
+
+        System.out.println("Enter new customer email");
+        String newCustomerEmail = scanner.nextLine();
+
+        klant.setEmailaddres(newCustomerEmail);
+
+        return klant;
+    }
 
     private Klanten createKlanten() {
 
@@ -90,7 +111,6 @@ public class KlantenService {
         String customerEmail = scanner.nextLine();
 
         klant.setEmailaddres(customerEmail);
-
 
         return klant;
     }
