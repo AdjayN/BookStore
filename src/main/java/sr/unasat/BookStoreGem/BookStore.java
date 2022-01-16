@@ -1,5 +1,6 @@
 package sr.unasat.BookStoreGem;
 
+import sr.unasat.BookStoreGem.services.KlantenService;
 import sr.unasat.BookStoreGem.services.PurchasesService;
 import sr.unasat.BookStoreGem.services.RapportService;
 import sr.unasat.BookStoreGem.services.ReserveringService;
@@ -17,6 +18,7 @@ public class BookStore<endProgram> {
         ReserveringService reserveringService = new ReserveringService();
         PurchasesService purchasesService = new PurchasesService();
         RapportService rapportService = new RapportService();
+        KlantenService klantenService = new KlantenService();
 
 
         while (endProgram) {
@@ -43,6 +45,8 @@ public class BookStore<endProgram> {
                     break;
                 case 3:
                     System.out.println("Go to Guest database");
+                    scanner.nextLine();
+                    klantenService.klantenMenuService();
                     break;
                 case 4:
                     System.out.println("Go to Book database");
