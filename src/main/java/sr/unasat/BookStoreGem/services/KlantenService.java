@@ -80,6 +80,7 @@ public class KlantenService {
 
         System.out.println("\n Add a customer:\n");
 
+        scanner.nextLine();
         System.out.println("Enter a customer name");
         String customerName = scanner.nextLine();
 

@@ -7,7 +7,7 @@ import sr.unasat.BookStoreGem.services.ReserveringService;
 
 import java.util.Scanner;
 
-public class BookStore<endProgram> {
+public class BookStore {
 
     public static void main(String[] args) {
 
@@ -19,7 +19,6 @@ public class BookStore<endProgram> {
         PurchasesService purchasesService = new PurchasesService();
         RapportService rapportService = new RapportService();
         KlantenService klantenService = new KlantenService();
-
 
         while (endProgram) {
 
