@@ -32,7 +32,7 @@ public class KlantenService {
     public void klantenMenuService() {
         boolean exit = true;
 
-        while(exit){
+        while (exit) {
 
             String klantenHeader = "\n-----Klanten----\n";
 
@@ -46,9 +46,12 @@ public class KlantenService {
 
             int selectedOption = scanner.nextInt();
 
-            switch(selectedOption){
+            switch (selectedOption) {
                 case 1:
                     System.out.println("Select on");
+                    int klantId = getKlantenId();
+                    Klanten klant1 = getKlant(klantId);
+                    System.out.println(klant1);
                     break;
                 case 2:
                     Klanten klant = createKlanten();
@@ -59,20 +62,26 @@ public class KlantenService {
                     System.out.println("Enter old klant id");
                     int oldKlantId = scanner.nextInt();
                     Klanten klantUpdated = getUpdateKlantInfo();
-                    updateKlant(oldKlantId,klantUpdated);
+                    updateKlant(oldKlantId, klantUpdated);
                     break;
                 case 4:
                     System.out.println("Delete");
+                    int deleteKlantId = getKlantenId();
+                    deleteKlant(deleteKlantId);
                     break;
                 case 5:
                     System.out.println("Select all");
+                    System.out.println("Select all klanten");
+                    List<Klanten> klantenList = getKlantenList();
+                    System.out.println(klantenList);
                     break;
                 case 6:
                     exit = false;
                     break;
                 default:
                     System.out.print("\n----Invalid option selected!----\n");
-            };
+            }
+            ;
 
         }
     }
@@ -115,33 +124,43 @@ public class KlantenService {
         return klant;
     }
 
-    public List<Klanten> getKlantenList(){
 
-        List<Klanten> klantenList = klantenDAO.retrievenKlantenlist();
-        return klantenList;
 
+    // add new klant record to database
+    public Klanten addKlant(Klanten klanten) {
+        return klantenDAO.create(klanten);
     }
 
-    public Klanten getKlant(int id){
+    // Update klant record from database
+    public Klanten updateKlant(int id, Klanten klanten) {
+        return klantenDAO.updateklanten(id, klanten);
+    }
+
+    // Delete klant record from databse
+    public void deleteKlant(int id) {
+        klantenDAO.delete(id);
+    }
+
+// get 1 klant by klant id
+    public Klanten getKlant(int id) {
 
         Klanten klant = klantenDAO.selectKlantenById(id);
         return klant;
     }
 
-    // add new klant record to database
-    public Klanten addKlant(Klanten klanten){
-        return klantenDAO.create(klanten);
-    }
+    private int getKlantenId() {
 
-    // Update klant record from database
-    public Klanten updateKlant(int id, Klanten klanten){
-        return klantenDAO.updateklanten(id,klanten);
-    }
+        System.out.println("\nEnter klant id:\n");
+        int klantenId = scanner.nextInt();
 
-    // Delete klant record from databse
-    public void deleteKlant(int id){
-        klantenDAO.delete(id);
+        return klantenId;
     }
+// get all klanten from list
+    public List<Klanten> getKlantenList() {
 
+        List<Klanten> klantenList = klantenDAO.retrievenKlantenlist();
+        return klantenList;
+
+    }
 }
 

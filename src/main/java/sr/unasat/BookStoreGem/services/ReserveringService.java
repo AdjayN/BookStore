@@ -27,15 +27,15 @@ public class ReserveringService {
         this.scanner = new Scanner(System.in);
         this.reserveringenDAO = new ReserveringenDAO(JPAConfiguration.getEntityManager());
         this.klantenDAO = new KlantenDAO(JPAConfiguration.getEntityManager());
-        this.booksDAO  = new BooksDAO(JPAConfiguration.getEntityManager());
-        this.director  = new Director();
+        this.booksDAO = new BooksDAO(JPAConfiguration.getEntityManager());
+        this.director = new Director();
     }
 
     public void reserveringMenuService() {
 
         boolean exit = true;
 
-        while(exit){
+        while (exit) {
 
             String reservingHeader = "\n-----Reserveringen----\n";
 
@@ -49,9 +49,12 @@ public class ReserveringService {
 
             int selectedOption = scanner.nextInt();
 
-            switch(selectedOption){
+            switch (selectedOption) {
                 case 1:
-                    System.out.println("Select on");
+                    System.out.println("Select a reservering");
+                    int reserveringId = getReserveringId();
+                    Reserveringen reserveringen = getReservering(reserveringId);
+                    System.out.println(reserveringen);
                     break;
                 case 2:
                     Reserveringen reservering = createReservering();
@@ -62,19 +65,26 @@ public class ReserveringService {
                     break;
                 case 4:
                     System.out.println("Delete");
+                    int deleteReserveringId = getReserveringId();
+                    deleteReservering(deleteReserveringId);
                     break;
                 case 5:
                     System.out.println("Select all");
+                    System.out.println("Select all resveringen");
+                    List<Reserveringen> reserveringList = getReserveringList();
+                    System.out.println(reserveringList);
                     break;
                 case 6:
                     exit = false;
                     break;
                 default:
                     System.out.print("\n----Invalid option selected!----\n");
-            };
+            }
+            ;
 
         }
     }
+
 
     private Reserveringen createReservering() {
 
@@ -100,12 +110,12 @@ public class ReserveringService {
         while (!bookSelected) {
 
             System.out.print(
-                    + 1 + ". Add a book.\n"
-                    + 2 + ". Finish adding books\n");
+                    +1 + ". Add a book.\n"
+                            + 2 + ". Finish adding books\n");
 
             int selectedOption = scanner.nextInt();
 
-            switch(selectedOption){
+            switch (selectedOption) {
                 case 1:
                     if (booksList.size() < 4) {
                         System.out.println("Enter a book id");
@@ -122,7 +132,8 @@ public class ReserveringService {
                     break;
                 default:
                     System.out.print("\n----Invalid option selected!----\n");
-            };
+            }
+            ;
 
             reserveringen.setBooksList(booksList);
 
@@ -132,7 +143,7 @@ public class ReserveringService {
     }
 
     // add new reservering record to database
-    public Reserveringen addReservering(Reserveringen reserveringen){
+    public Reserveringen addReservering(Reserveringen reserveringen) {
 
         int klantId = reserveringen.getKlanten().getIdKlanten();
         Klanten klant = klantenDAO.selectKlantenById(klantId);
@@ -142,13 +153,14 @@ public class ReserveringService {
 
         int totalAmount = 0;
 
-        if(bookListWithId.size() == 1){
+        if (bookListWithId.size() == 1) {
             Books book1WithId = bookListWithId.get(0);
             int book1Id = book1WithId.getIdbook();
             Books book1 = booksDAO.selectBooksById(book1Id);
             booksList.add(book1);
             totalAmount = book1.getPrijs();
-        }if(bookListWithId.size() == 2){
+        }
+        if (bookListWithId.size() == 2) {
             Books book1WithId = bookListWithId.get(0);
             Books book2WithId = bookListWithId.get(1);
             int book1Id = book1WithId.getIdbook();
@@ -158,7 +170,8 @@ public class ReserveringService {
             booksList.add(book1);
             booksList.add(book2);
             totalAmount = book1.getPrijs() + book2.getPrijs();
-        }if(bookListWithId.size() == 3){
+        }
+        if (bookListWithId.size() == 3) {
             Books book1WithId = bookListWithId.get(0);
             Books book2WithId = bookListWithId.get(1);
             Books book3WithId = bookListWithId.get(2);
@@ -171,7 +184,7 @@ public class ReserveringService {
             booksList.add(book1);
             booksList.add(book2);
             booksList.add(book3);
-            totalAmount = book1.getPrijs() + book2.getPrijs()+ book3.getPrijs();
+            totalAmount = book1.getPrijs() + book2.getPrijs() + book3.getPrijs();
         }
 
         reserveringen.setTotal_amount(totalAmount);
@@ -180,8 +193,36 @@ public class ReserveringService {
 
         //Builder
         BuilderReser builderReser = new ConcreteBuilderReser();
-        Reserveringen reserveringNew = director.DirectBuildReser(builderReser,reserveringen);
+        Reserveringen reserveringNew = director.DirectBuildReser(builderReser, reserveringen);
 
         return reserveringenDAO.create(reserveringNew);
     }
-}
+
+    // get reservering list
+    public List<Reserveringen> getReserveringList() {
+
+        List<Reserveringen> reserveringList = reserveringenDAO.retrievReserveringList();
+        return reserveringList;
+    }
+    // get a reservering
+    public Reserveringen getReservering(int id) {
+
+        Reserveringen reserveringen = reserveringenDAO.selectReserveringenById(id);
+        return reserveringen;
+
+    }
+    private int getReserveringId() {
+
+        System.out.println("\nEnter reservering id:\n");
+        int reserveringId = scanner.nextInt();
+
+        return reserveringId;
+
+    }
+    public void deleteReservering(int id){
+        reserveringenDAO.delete(id);
+    }
+    }
+
+
+

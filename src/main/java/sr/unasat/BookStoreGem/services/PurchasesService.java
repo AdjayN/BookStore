@@ -71,7 +71,7 @@ public class PurchasesService {
                     System.out.println("Update");
                     break;
                 case 4:
-                    int deletePurchaseId = getDeletePurchaseId();
+                    int deletePurchaseId = getPurchaseId();
                     deletePurchase(deletePurchaseId);
                     break;
                 case 5:
