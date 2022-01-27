@@ -42,7 +42,9 @@ public class RapportService {
 
                     break;
                 case 2:
-                    soldReservationBooksPerMonth(1);
+                    System.out.println("Enter a  month");
+                    int month = scanner.nextInt();
+                    soldReservationBooksPerMonth(month);
                     break;
                 case 3:
                     omzetPerMaand(1);
