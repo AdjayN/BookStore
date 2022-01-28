@@ -25,7 +25,7 @@ public class ReturnListSoldReservationBooks implements Strategy {
         int size = purchasesArr.length;
         boolean visited[] = new boolean[size];
         Arrays.fill(visited,false);
-        int count = 1; //check
+        int count = 0; //check
         for( int i = 0; i < size ; i++){
 
 

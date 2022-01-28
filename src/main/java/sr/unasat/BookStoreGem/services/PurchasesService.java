@@ -49,10 +49,11 @@ public class PurchasesService {
             System.out.print(purchaseHeader + "\nMenu: \n"
                     + 1 + ". Select a Purchase.\n"
                     + 2 + ". Add Purchase.\n"
-                    + 3 + ". Update Purchase.\n"
-                    + 4 + ". Delete Purchase.\n"
-                    + 5 + ". Select all Purchase.\n"
-                    + 6 + ". Exit\n");
+                    + 3 + ". Add Purchase with reservation id.\n"
+                    + 4 + ". Update Purchase.\n"
+                    + 5 + ". Delete Purchase.\n"
+                    + 6 + ". Select all Purchase.\n"
+                    + 7 + ". Exit\n");
 
             int selectedOption = scanner.nextInt();
 
@@ -68,18 +69,23 @@ public class PurchasesService {
                     addPurchase(newPurchase);
                     break;
                 case 3:
-                    System.out.println("Update");
+                    System.out.println("Select a reservation");
+                    int reservationId = getReservationId();
+                    addPurchaseWithReservationId(reservationId);
                     break;
                 case 4:
+                    System.out.println("Update");
+                    break;
+                case 5:
                     int deletePurchaseId = getPurchaseId();
                     deletePurchase(deletePurchaseId);
                     break;
-                case 5:
+                case 6:
                     System.out.println("Select all purchases");
                     List<Purchases> purchaseList = getPurchaseList();
                     System.out.println(purchaseList);
                     break;
-                case 6:
+                case 7:
                     exit = false;
                     break;
                 default:
@@ -87,6 +93,12 @@ public class PurchasesService {
             };
 
         }
+    }
+
+    private int getReservationId() {
+        System.out.println("\nEnter reservation id:\n");
+        int reservationId = scanner.nextInt();
+        return reservationId;
     }
 
     private int getPurchaseId() {
@@ -126,7 +138,7 @@ public class PurchasesService {
         while (!bookSelected) {
 
             System.out.print(
-                    + 1 + ". Add a book.\n"
+                            + 1 + ". Add a book.\n"
                             + 2 + ". Finish adding books\n");
 
             int selectedOption = scanner.nextInt();
