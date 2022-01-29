@@ -28,18 +28,30 @@ public class ReturnListOmzetPerMaand implements Strategy {
         int size = purchasesArr.length;
         boolean visited[] = new boolean[size];
         Arrays.fill(visited,false);
-        int total = 1; //check
+        int total = 0; //check
 
-        for(int i = 1; i<size ; i++){
+        for(int i = 0; i<size ; i++){
 
-            System.out.println("Purchase ID; " + purchasesArr[i].getIdPurchase() + " Amount: " +
-                    purchasesArr[i].getTotalPurchaseAmount());
+            if (purchasesArr[i].getReserveringen() == null) {
+
+                System.out.println("Purchase ID: " + purchasesArr[i].getIdPurchase() + " Amount of books: " +
+                        purchasesArr[i].getBooksList().size() + " Subtotal: SRD" +
+                        purchasesArr[i].getTotalPurchaseAmount());
+
+            } else {
+
+                System.out.println("Purchase ID: " + purchasesArr[i].getIdPurchase() + " Amount of books: " +
+                        purchasesArr[i].getReserveringen().getBooksList().size() + " Subtotal: SRD" +
+                        purchasesArr[i].getTotalPurchaseAmount());
+            }
+
+
             total+=purchasesArr[i].getTotalPurchaseAmount();
 
         }
 
-        System.out.println("-----------------------------------");
-        System.out.println("Total amount: " + total);
+        System.out.println("------------------------------------------------");
+        System.out.println("Total amount: SRD\t" + total);
 
 
         return total;

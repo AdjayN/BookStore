@@ -109,7 +109,7 @@ public class BooksDAO {
             transaction = entityManager.getTransaction();
             transaction.begin();
             Books book = entityManager.find(Books.class,id);
-            if(book.getGereserveerd_aantal() < book.getAantal()){
+            if(book.getGereserveerd_aantal() <= book.getAantal()){
                 book.setGereserveerd_aantal(book.getGereserveerd_aantal() + gereserveerd_aantal);
                 entityManager.merge(book);
                 transaction.commit();

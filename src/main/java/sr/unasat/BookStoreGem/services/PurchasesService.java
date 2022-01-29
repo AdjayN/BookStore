@@ -83,7 +83,9 @@ public class PurchasesService {
                 case 6:
                     System.out.println("Select all purchases");
                     List<Purchases> purchaseList = getPurchaseList();
-                    System.out.println(purchaseList);
+                    for (Purchases purchases: purchaseList){
+                        System.out.println(purchases);
+                    }
                     break;
                 case 7:
                     exit = false;

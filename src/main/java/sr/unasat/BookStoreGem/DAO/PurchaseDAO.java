@@ -195,7 +195,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveJanuaryPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-01-01' and '2020-01-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-01-01' and '2022-01-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -204,7 +204,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveFebruaryPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-02-01' and '2020-01-28'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-02-01' and '2022-01-28'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -214,7 +214,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveMarchPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-03-01' and '2020-03-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-03-01' and '2022-03-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -223,7 +223,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveAprilPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-04-01' and '2020-04-30'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-04-01' and '2022-04-30'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -233,7 +233,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveMayPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-05-01' and '2020-05-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-05-01' and '2022-05-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -243,7 +243,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveJunePurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-06-01' and '2020-06-30'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-06-01' and '2022-06-30'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -253,7 +253,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveJulyPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-07-01' and '2020-07-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-07-01' and '2022-07-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -263,7 +263,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveAugustPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-08-01' and '2020-08-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-08-01' and '2022-08-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -273,7 +273,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveSeptemberPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-09-01' and '2020-09-30'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-09-01' and '2022-09-30'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -283,7 +283,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveOctoberPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-10-01' and '2020-10-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-10-01' and '2022-10-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -293,7 +293,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveNovemberPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-11-01' and '2020-11-30'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-11-01' and '2022-11-30'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();
@@ -303,7 +303,7 @@ public class PurchaseDAO {
     public List<Purchases> retrieveDecemberPurchaseList(){
 
         entityManager.getTransaction().begin();
-        String jpql = "select p from Purchases p where p.purchaseDate between '2020-12-01' and '2020-12-31'";
+        String jpql = "select p from Purchases p where p.purchaseDate between '2022-12-01' and '2022-12-31'";
         TypedQuery<Purchases> query = entityManager.createQuery(jpql,Purchases.class);
         List<Purchases> PurchaseList = query.getResultList();
         entityManager.getTransaction().commit();

@@ -33,7 +33,7 @@ public class Books {
     private List<Reserveringen> reserveringenList = new ArrayList<>();
 
     //Relatie met purchases
-    @ManyToMany(mappedBy = "booksList")
+    @ManyToMany(mappedBy = "booksList", fetch = FetchType.EAGER)
     private List<Purchases> purchasesList = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)

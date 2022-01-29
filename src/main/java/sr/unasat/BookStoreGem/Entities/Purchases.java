@@ -25,7 +25,7 @@ public class Purchases {
     private Klanten klanten;
 
     //Relatie tussen boeken
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "purchases_books",
             joinColumns = {@JoinColumn(name = "purchase_id")},

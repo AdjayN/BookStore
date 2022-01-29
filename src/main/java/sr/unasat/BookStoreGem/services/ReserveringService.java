@@ -72,7 +72,9 @@ public class ReserveringService {
                     System.out.println("Select all");
                     System.out.println("Select all resveringen");
                     List<Reserveringen> reserveringList = getReserveringList();
-                    System.out.println(reserveringList);
+                    for (Reserveringen reservering1: reserveringList){
+                        System.out.println(reservering1);
+                    }
                     break;
                 case 6:
                     exit = false;
