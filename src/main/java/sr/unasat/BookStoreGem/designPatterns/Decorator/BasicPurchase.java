@@ -17,7 +17,7 @@ public class BasicPurchase implements Purchase {
     @Override
     public int getCost() {
         List<Books> booksList = purch.getBooksList();
-        if (booksList.size()<4){
+        if (booksList.size()==1){
 
             Books book1 = booksList.get(0);
             int bookPrijs = book1.getPrijs();

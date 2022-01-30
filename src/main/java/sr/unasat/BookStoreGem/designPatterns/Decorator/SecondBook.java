@@ -19,7 +19,7 @@ public class SecondBook implements Purchase {
     public int getCost() {
         List<Books> booksList = tempPurch.getPurchases().getBooksList();
 
-        if (booksList.size()<4){
+        if (booksList.size()==2){
 
             Books book2 = booksList.get(1);
             int bookPrijs2 = book2.getPrijs();
